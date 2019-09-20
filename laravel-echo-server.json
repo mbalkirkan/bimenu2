@@ -1,0 +1,40 @@
+{
+	"authHost": "http://proj.test/",
+	"authEndpoint": "/api/broadcasting/auth",
+	"clients": [
+		{
+			"appId": "APP_ID",
+			"key": "66986ebf63a754dd74616109f4607e19"
+		},
+		{
+			"appId": "MyApp",
+			"key": "865e2ef15f00c65c4036771e7b4b44d7"
+		}
+	],
+	"database": "redis",
+	"databaseConfig": {
+		"redis": {},
+		"sqlite": {
+			"databasePath": "/database/laravel-echo-server.sqlite"
+		}
+	},
+	"devMode": true,
+	"host": null,
+	"port": "6001",
+	"protocol": "http",
+	"socketio": {},
+	"sslCertPath": "",
+	"sslKeyPath": "",
+	"sslCertChainPath": "",
+	"sslPassphrase": "",
+	"subscribers": {
+		"http": true,
+		"redis": true
+	},
+    "apiOriginAllow":{
+        "allowCors" : true,
+        "allowOrigin" : "http://proj.test/",
+        "allowMethods" : "GET, POST",
+        "allowHeaders" : "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
+    }
+}
