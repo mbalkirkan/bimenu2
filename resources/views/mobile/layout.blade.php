@@ -37,6 +37,8 @@
             </a>
         </div>
         <div class="sidebar-wrapper">
+            @auth
+
             <div class="user">
                 <div class="photo">
                     <img src="../assets/img/faces/avatar.jpg" />
@@ -72,6 +74,8 @@
                     </div>
                 </div>
             </div>
+
+            @endauth
 
         </div>
     </div>

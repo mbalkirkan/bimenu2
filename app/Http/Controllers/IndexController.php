@@ -5,6 +5,7 @@ namespace Bimenu\Http\Controllers;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 
+
 class IndexController extends Controller
 {
     /**
@@ -22,6 +23,7 @@ class IndexController extends Controller
         $agent = new Agent();
 
       //  dd($agent->isMobile());
+       // Auth::loginUsingId(1);
 
         return view('mobile.index');
     }

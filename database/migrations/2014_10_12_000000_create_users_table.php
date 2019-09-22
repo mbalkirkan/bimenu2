@@ -20,8 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('surname');
             $table->string('phone')->nullable();
             $table->string('country')->nullable();
-            $table->text('notification_token')->nullable();;
-            $table->integer('coins')->nullable();;
             $table->integer('authority');
             $table->text('photo')->nullable();;
             $table->string('password');
