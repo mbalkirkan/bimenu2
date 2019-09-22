@@ -16,9 +16,8 @@ class QrCodesTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         for($i = 0; $i < 10; $i++) {
             Qrcode::create([
-                'product_id'=>10,
-                 'product_table_id'=>1
-
+                'product_id'=>1,
+                 'product_table_id'=>10
             ]);
         }
     }

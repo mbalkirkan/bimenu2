@@ -118,7 +118,7 @@
                                 var outputContainer = document.getElementById("output");
                                 var outputMessage = document.getElementById("outputMessage");
                                 var outputData = document.getElementById("outputData");
-
+                                var respons=0;
                                 function drawLine(begin, end, color) {
                                     canvas.beginPath();
                                     canvas.moveTo(begin.x, begin.y);
@@ -150,7 +150,9 @@
                                         var code = jsQR(imageData.data, imageData.width, imageData.height, {
                                             inversionAttempts: "dontInvert",
                                         });
+
                                         if (code) {
+
                                             // drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
                                             // drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
                                             // drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
@@ -158,25 +160,48 @@
                                             outputMessage.hidden = true;
                                             outputData.parentElement.hidden = false;
                                             outputData.innerText = code.data;
+                                            var data = code.data;
 
-                                            var data=code.data;
+                                            if(respons==0) {
+                                                respons=1;
+                                                $.ajax({
+                                                    url: "{{route('QRScan')}}",
+                                                    type: "post",
+                                                    data: '{"data":"' + data + '"}',
+                                                    contentType: "application/json",
+                                                    success: function (response) {
+                                                        //console.log(response[0].product_name);
+                                                        let timerInterval
+                                                        Swal.fire({
+                                                            title: 'QR Kod Okundu, Yönlendiriliyorsunuz..',
 
-                                         //   video.stop();
-                                            var den=0;
-    $.ajax({
-        type: "POST",
-        url: "{{route('QRScan')}}",
-        data: '{"data":"' + data + '","data2":"3"}', // Sunucuya gönderilen veri
-        contentType: "application/json",
-        success: function (msg) {
+                                                            html: '<img class="img-fluid img-thumbnail" src="'+JSON.parse(response[0].product_photos)[0]+'"><br>'+response[0].product_name+'<br>'+ response[0].product_description+'<br>Masa : '+response[0].product_tables,
+                                                            timer: 3000,
+                                                            onBeforeOpen: () => {
+                                                                Swal.showLoading()
+                                                                timerInterval = setInterval(() => {
+                                                                    Swal.getContent().querySelector('strong')
+                                                                        .textContent = Swal.getTimerLeft()
+                                                                }, 100)
+                                                            },
+                                                            onClose: () => {
+                                                                clearInterval(timerInterval)
+                                                            }
+                                                        }).then((result) => {
+                                                            if (
+                                                                /* Read more about handling dismissals below */
+                                                                result.dismiss === Swal.DismissReason.timer
+                                                            ) {
+                                                                window.location = "{{ route('QRScan',['product_id'=>'deneme'])}}";
+                                                            }
+                                                        })
 
-                alert(JSON.stringify( msg));
-        },
-        error: function (err) {
-            alert(err.responseText);
-        }
-    });
-
+                                                    },
+                                                    error: function (jqXHR, textStatus, errorThrown) {
+                                                        console.log(textStatus, errorThrown);
+                                                    }
+                                                });
+                                            }
 
                                         } else {
                                             outputMessage.hidden = false;
@@ -186,17 +211,17 @@
                                     requestAnimationFrame(tick);
                                 }
                             </script>
+<img src="">
+                            {{--                            <button id="btn_scan" class="btn btn-youtube">--}}
+                            {{--                                <i class="fa fa-youtube-play"></i> QR Kod Tara--}}
+                            {{--                            </button>--}}
 
-{{--                            <button id="btn_scan" class="btn btn-youtube">--}}
-{{--                                <i class="fa fa-youtube-play"></i> QR Kod Tara--}}
-{{--                            </button>--}}
+                            {{--                            <script type="text/javascript">--}}
+                            {{--                                $("#btn_scan").click(function () {--}}
 
-{{--                            <script type="text/javascript">--}}
-{{--                                $("#btn_scan").click(function () {--}}
-
-{{--                                    }--}}
-{{--                                );--}}
-{{--                            </script>--}}
+                            {{--                                    }--}}
+                            {{--                                );--}}
+                            {{--                            </script>--}}
                         </div>
                     </div>
                 </div>

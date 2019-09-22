@@ -22,7 +22,7 @@ class MenuController extends Controller
     {
 
         $product_id=$request->product_id;
-        $product_id=2;
+        //$product_id=1;
 
 //        Product::select('id')
 //            ->join('votesbi dk ', 'votes.user_id', '=', 'friends.friend_id')//kanka geliyorum hemen patron çağırdı 5 dk max kanka benim işim var acil sonra hallederiz
@@ -59,7 +59,7 @@ class MenuController extends Controller
 
 
 
-return collect($result)[0];
+
 
 
       return view('mobile.menu',['result'=>$result]);

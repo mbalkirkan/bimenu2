@@ -12,9 +12,21 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
-            'name'=>"Yemekler",
-            'description'=>"Ana Yemekler",
-        ]);
+
+        $names=['Yemekler','Ara Sıcaklar','Tatlılar',
+        'Sıcak İçecekler','Soğuk İçecekler'];
+        $descriptions=['Ana Yemekler',
+            'Atıştırmalık Aparatifler',
+            'En Tatlı Anlar İçin Bir Tatlı..',
+            'İçinizi Isıtacak..',
+            'Serin Bir Lezzet'];
+        foreach ($names as $key=>$name)
+        {
+            Category::create([
+                'name'=>$name,
+                'description'=>$descriptions[$key],
+            ]);
+        }
+
     }
 }
