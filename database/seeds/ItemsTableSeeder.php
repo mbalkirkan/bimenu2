@@ -60,5 +60,35 @@ class ItemsTableSeeder extends Seeder
             'product_id'=>"1",
             'category_id'=>"4",
         ]);
+
+        Items::create([
+            'name'=>"yemek1",
+            'description'=>"Dumanı üstünde gelmezse geri yolla bubam",
+            'enabled'=>"1",
+            'price'=>"5",
+            'photos'=>"[\"https://media-cdn.t24.com.tr/media/library/2019/04/1556455063389-cay.jpg\", \"name2\", \"name3\"]",
+            'product_id'=>"1",
+            'category_id'=>"1",
+        ]);
+
+        Items::create([
+            'name'=>"yemek2 le",
+            'description'=>"Dumanı üstünde gelmezse geri yolla bubam",
+            'enabled'=>"1",
+            'price'=>"5",
+            'photos'=>"[\"https://media-cdn.t24.com.tr/media/library/2019/04/1556455063389-cay.jpg\", \"name2\", \"name3\"]",
+            'product_id'=>"1",
+            'category_id'=>"1",
+        ]);
+
+        Items::create([
+            'name'=>"yemek4",
+            'description'=>"Dumanı üstünde gelmezse geri yolla bubam",
+            'enabled'=>"1",
+            'price'=>"5",
+            'photos'=>"[\"https://media-cdn.t24.com.tr/media/library/2019/04/1556455063389-cay.jpg\", \"name2\", \"name3\"]",
+            'product_id'=>"1",
+            'category_id'=>"1",
+        ]);
     }
 }

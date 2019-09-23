@@ -69,12 +69,24 @@
                                                         @endif
                                                         <div class="col-lg-3 col-md-4 col-6"
                                                              style="padding-right: 0px; padding-left: 0px; padding-bottom: 0px">
-                                                            <a href="#" class="d-block mb-4 h-100">
+
+                                                            <a href="#"  data-toggle="modal"
+                                                               data-target="#modal{{$item->item_id}}" class="d-block mb-4 h-100">
+                                                                <div style="
+                                                            top: 60%;
+                                                            width:150px;
+                                                            height:25px;
+                                                            /* margin-top: -25px; */
+                                                            color:white;
+                                                            position: absolute;
+                                                            background: rgba(1,1,1,0.5);
+                                                            display:block;
+                                                            margin-left: 5px;
+                                                            "> Deneme</div>
                                                                 <img class="img-fluid img-thumbnail"
                                                                      src="{{json_decode($item->item_photos)[0]}}"
                                                                      alt=""
-                                                                     data-toggle="modal"
-                                                                     data-target="#modal{{$item->item_id}}">
+                                                                    >
                                                             </a>
                                                         </div>
                                                         @if($loop->last|| $result[$loop->index+1]->category_id!=$item->category_id)
