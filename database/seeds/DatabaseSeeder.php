@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ItemsTableSeeder::class);
         $this->call(ProductTablesSeeder::class);
         $this->call(QrCodesTableSeeder::class);
+        $this->call(CustomersTableSeeder::class);
     }
 }

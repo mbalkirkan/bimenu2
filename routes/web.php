@@ -24,16 +24,17 @@ Route::post('/pushprice', 'SocketPostController@socketPushPrice')->name('PushPri
 
 
 Route::group(['middleware' => 'checksession'], function () {
-    Route::get('/', 'IndexController@index')->name('mobile.index');
+    Route::get('/', 'IndexController@index')->middleware('checkonorder')->name('mobile.index');
     Route::post('/qr_scan', 'QRController@qrScan')->name('QRScan');
     Route::get('/qr_generator', 'QRController@qrGenerator')->name('QRGenerator');
-    Route::get('/menu', 'MenuController@menu')->name('mobile.menu');
+    Route::get('/menu', 'MenuController@menu')->name('mobile.menu')->middleware('checkorder');
     Route::get('/logout', 'IndexController@session_flush')->name('session.flush');
 
 });
 
 Route::group(['middleware' => 'checkonsession'], function () {
 Route::get('/session', 'IndexController@session')->name('session.view');
+Route::post('/slogin', 'IndexController@session_login')->name('session.login');
 Route::post('/session', 'IndexController@session_save')->name('session.save');
 });
 Auth::routes();

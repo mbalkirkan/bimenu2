@@ -63,6 +63,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checksession' =>\Bimenu\Http\Middleware\CheckSession::class,
         'checkonsession' =>\Bimenu\Http\Middleware\CheckOnSession::class,
+        'checkonorder' =>\Bimenu\Http\Middleware\CheckOnOrder::class,
+        'checkorder' =>\Bimenu\Http\Middleware\CheckOrder::class,
     ];
 
     /**

@@ -192,7 +192,7 @@
                                                                 /* Read more about handling dismissals below */
                                                                 result.dismiss === Swal.DismissReason.timer
                                                             ) {
-
+                                                                window.location.href = "{{route('mobile.menu')}}";
                                                             }
                                                         })
 
