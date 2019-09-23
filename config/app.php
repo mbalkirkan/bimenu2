@@ -187,6 +187,12 @@ return [
          * user agent
          */
         Jenssegers\Agent\AgentServiceProvider::class,
+
+
+        /*
+         * QR Code Generator
+         */
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
     ],
 
     /*
@@ -238,6 +244,8 @@ return [
 
 
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
     ],
 
 ];

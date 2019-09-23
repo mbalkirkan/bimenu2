@@ -192,7 +192,7 @@
                                                                 /* Read more about handling dismissals below */
                                                                 result.dismiss === Swal.DismissReason.timer
                                                             ) {
-                                                                window.location = "{{ route('QRScan',['product_id'=>'deneme'])}}";
+                                                                window.location.href = "{{route('mobile.menu')}}";
                                                             }
                                                         })
 
@@ -211,7 +211,6 @@
                                     requestAnimationFrame(tick);
                                 }
                             </script>
-<img src="">
                             {{--                            <button id="btn_scan" class="btn btn-youtube">--}}
                             {{--                                <i class="fa fa-youtube-play"></i> QR Kod Tara--}}
                             {{--                            </button>--}}

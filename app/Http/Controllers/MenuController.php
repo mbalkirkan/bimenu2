@@ -21,8 +21,12 @@ class MenuController extends Controller
     public function menu(Request $request)
     {
 
-        $product_id=$request->product_id;
-        //$product_id=1;
+        //$product_id=$request->product_id;
+        $product_id=1;
+
+
+
+
 
 //        Product::select('id')
 //            ->join('votesbi dk ', 'votes.user_id', '=', 'friends.friend_id')//kanka geliyorum hemen patron çağırdı 5 dk max kanka benim işim var acil sonra hallederiz

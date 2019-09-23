@@ -2,6 +2,7 @@
 
 namespace Bimenu\Http;
 
+
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -60,6 +61,10 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'checksession' =>\Bimenu\Http\Middleware\CheckSession::class,
+        'checkonsession' =>\Bimenu\Http\Middleware\CheckOnSession::class,
+        'checkonorder' =>\Bimenu\Http\Middleware\CheckOnOrder::class,
+        'checkorder' =>\Bimenu\Http\Middleware\CheckOrder::class,
     ];
 
     /**
