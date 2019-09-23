@@ -11,10 +11,12 @@ class ProductTablesSeeder extends Seeder
      */
     public function run()
     {
-        ProductTable::create([
-            'product_id'=>'1',
-            'name'=>"Salon Masa 1",
-            'enabled'=>"1",
-        ]);
+        for($i = 0; $i < 10; $i++) {
+            ProductTable::create([
+                'product_id' => '1',
+                'name' => "Salon Masa ".$i,
+                'enabled' => "1",
+            ]);
+        }
     }
 }

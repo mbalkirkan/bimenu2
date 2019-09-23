@@ -17,7 +17,7 @@ class ProductsTableSeeder extends Seeder
             'description'=>"Heykelin Karşısında Cafe",
             'type'=>"cafe",
             'country'=>"Uşak",
-            'photos'=>"[\"name1\", \"name2\", \"name3\"]",
+            'photos'=>"[\"https://i.nefisyemektarifleri.com/2015/03/21/cafe-latte-susleme.jpg\", \"name2\", \"name3\"]",
             'phone'=>"5555555555",
             'address'=>"Uşak Merkez Caddesi",
             'maps_address'=>1,

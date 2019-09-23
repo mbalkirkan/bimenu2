@@ -22,6 +22,10 @@
 
 <body class="">
 <div class="wrapper ">
+    @php
+        if(Session::has('user.phone'))
+    {
+    @endphp
     <div class="sidebar" data-color="rose" data-background-color="black" data-image="../assets/img/sidebar-1.jpg">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
@@ -29,24 +33,24 @@
           Tip 2: you can also add an image using data-image tag
       -->
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-                CT
+            <a href="" class="simple-text logo-mini">
+                BM
             </a>
-            <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-                Creative Tim
+            <a href="" class="simple-text logo-normal">
+                Bi Menü
             </a>
         </div>
         <div class="sidebar-wrapper">
-            @auth
+
 
             <div class="user">
                 <div class="photo">
-                    <img src="../assets/img/faces/avatar.jpg" />
+                    <img src="https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png" />
                 </div>
                 <div class="user-info">
                     <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Tania Andrew
+                 {{Session::get('user.name')}} {{Session::get('user.surname')}}
                 <b class="caret"></b>
               </span>
                     </a>
@@ -55,19 +59,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <span class="sidebar-mini"> MP </span>
-                                    <span class="sidebar-normal"> My Profile </span>
+                                    <span class="sidebar-normal"> Siparişlerim </span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <span class="sidebar-mini"> EP </span>
-                                    <span class="sidebar-normal"> Edit Profile </span>
+                                    <span class="sidebar-normal"> Detaylarım </span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{route('session.flush')}}">
                                     <span class="sidebar-mini"> S </span>
-                                    <span class="sidebar-normal"> Settings </span>
+                                    <span class="sidebar-normal"> Çıkış </span>
                                 </a>
                             </li>
                         </ul>
@@ -75,12 +79,19 @@
                 </div>
             </div>
 
-            @endauth
+
 
         </div>
     </div>
+    @php
+      }
+    @endphp
     <div class="main-panel">
         <!-- Navbar -->
+        @php
+            if(Session::has('user.phone'))
+        {
+        @endphp
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
@@ -101,6 +112,9 @@
 
             </div>
         </nav>
+    @php
+        }
+    @endphp
         <!-- End Navbar -->
         <div class="content">
             @yield('content')

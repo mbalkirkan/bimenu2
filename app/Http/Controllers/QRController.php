@@ -5,6 +5,7 @@ namespace Bimenu\Http\Controllers;
 
 
 use Bimenu\Product;
+
 use Bimenu\Qrcode;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class QRController extends Controller
     }
     public function qrScan(Request $request)
     {
-        $get_qr_scan= Qrcode::find('179bec46-48ed-46f9-97fb-cea81c19ee5f');
+        $get_qr_scan= Qrcode::find($request->data);
 
         $result = Product
             ::find($get_qr_scan->product_id)
@@ -35,7 +36,13 @@ class QRController extends Controller
             ->get();
 
         //return view('mobile.menu',['result'=>$result]);
-        return view('mobile.index');
+     //   return view('mobile.index');
         return  $result;
+    }
+
+    public function qrGenerator(Request $request)
+    {
+        $qr=Qrcode::all()->first();
+        return view('mobile.qrgenerator',['qr'=>$qr->id]);
     }
 }
