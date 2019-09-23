@@ -73,8 +73,8 @@
                                                                 <img class="img-fluid img-thumbnail"
                                                                      src="{{json_decode($item->item_photos)[0]}}"
                                                                      alt=""
-                                                                     data-toggle="modal{{$item->category_id}}"
-                                                                     data-target="#modal{{$item->category_id}}">
+                                                                     data-toggle="modal"
+                                                                     data-target="#modal{{$item->item_id}}">
                                                             </a>
                                                         </div>
                                                         @if($loop->last|| $result[$loop->index+1]->category_id!=$item->category_id)
@@ -94,8 +94,10 @@
                 </div>
             </div>
         </div>
+
+    @foreach ($result as $item)
         <!--Modal: Name-->
-        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal fade" id="modal{{$item->item_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
 
@@ -107,11 +109,10 @@
                         <div class="card-body">
 
                             <h4 class="card-title" align="center">
-                                <a href="#pablo">Cozy 5 Stars Apartment</a>
+                                <a href="#pablo">{{$item->item_name}}</a>
                             </h4>
                             <div class="card-description">
-                                The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to
-                                "Naviglio" where you can enjoy the main night life in Barcelona.
+                                {{$item->item_description}}
                             </div>
                             <div class="card-actions text-center">
                                 <button class="btn btn-link btn-twitter">
@@ -132,7 +133,7 @@
             </div>
         </div>
         <!--Modal: Name-->
-
+        @endforeach
     </div>
 @endsection
 
