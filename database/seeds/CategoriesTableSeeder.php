@@ -25,6 +25,7 @@ class CategoriesTableSeeder extends Seeder
             Category::create([
                 'name'=>$name,
                 'description'=>$descriptions[$key],
+                'product_id'=>1
             ]);
         }
 

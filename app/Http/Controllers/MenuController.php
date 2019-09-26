@@ -43,7 +43,7 @@ class MenuController extends Controller
              ->where('items.enabled',1)
             // ->join('categories', 'items.category_id', '=', 'categories.id')
             ->join('products', 'products.id', '=', 'items.product_id')
-            ->join('categories', 'categories.id', '=','items.category_id')
+            ->join('categories', 'categories.id', '=','items.category_id')->where('categories.product_id',$product_id)
             ->orderBy('items.category_id', 'ASC')
             ->select('products.name as product_name','categories.id as category_id','categories.name as category_name','categories.description as category_description','items.id as item_id','items.name as item_name','items.description as item_description','items.price as item_price','items.photos as item_photos')
             ->getQuery() // Optional: downgrade to non-eloquent builder so we don't build invalid User objects.
