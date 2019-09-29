@@ -30,6 +30,9 @@ Route::group(['middleware' => 'checksession'], function () {
     Route::get('/menu', 'MenuController@menu')->name('mobile.menu')->middleware('checkorder');
     Route::get('/logout', 'IndexController@session_flush')->name('session.flush');
 
+
+    Route::post('/order', 'OrderController@sale')->name('mobile.sale')->middleware('csrf');
+
 });
 
 Route::group(['middleware' => 'checkonsession'], function () {

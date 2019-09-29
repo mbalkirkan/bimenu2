@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('product_table_id');
             $table->integer('customer_id');
             $table->json('items_id')->nullable();
+            $table->string('notes')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });

@@ -15,7 +15,7 @@ class CustomersTableSeeder extends Seeder
         Customer::create([
             'name' =>'Muhammet',
             'surname'=>'Balkırkan',
-            'phone'=>'5558998123' ,
+            'phone'=>'1' ,
             'phone_verified'=>'1' ,
         ]);
     }

@@ -21,6 +21,7 @@ class ItemsTableSeeder extends Seeder
             'product_id'=>"1",
             'category_id'=>"1",
         ]);
+
         Items::create([
             'name'=>"Tavuk",
             'description'=>"Tavuk yemeği işte ne bekliyon",

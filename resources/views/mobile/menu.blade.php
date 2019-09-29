@@ -7,7 +7,7 @@
 
 
 @section('header')
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
     {{--    <link href="{{asset('css/custom.min.css')}}" rel="stylesheet">--}}
@@ -66,7 +66,6 @@
             var index = _.findIndex(cart, item);
             cart[index].quantity = cart[index].quantity + 1;
             show_cart();
-
         });
 
         $("body").on("click", ".DeleteItem", function () {
@@ -117,7 +116,8 @@
                 // cart_html += '</span></div>' ;
 
                 var total_amount = Number(total);
-                $(".TotalAmount").html("₺ " + total_amount.toFixed(2));+"  "
+                $(".TotalAmount").html("₺ " + total_amount.toFixed(2));
+                +"  "
                 $(".CartStatus").html("");
                 $("#Cart").html("");
                 $("#Cart").html(cart_html);
@@ -132,100 +132,57 @@
         }
 
 
+        $("body").on("click", "#completeOrder", function () {
+            if (cart.length < 1) {
 
-        $( "body" ).on( "click", "#completeOrder", function () {
-            if ( cart.length < 1 ) {
+                //  $( "#myModal" ).modal( "hide" );
 
-                $( "#myModal" ).modal( "hide" );
-
-                swal( "", "Cart is Empty", "error" );
+                //   swal( "", "Cart is Empty", "error" );
 
                 return false;
             }
-            $("#TableNo").text("");
 
-            var status = 1;
-            // if($("#OrderType").val() == "order") {
-            // status = 2;
-            // }
             var form_data = {
-                comments: $( "#comments" ).val(),
-                customer_id: $( "#customer_id" ).val(),
-                discount: $( "#discount" ).val(),
-                cashier_id: $( "#cashier_id" ).val(),
-                payment_with: $( "#payment_type" ).val(),
-                type: $( "#OrderType" ).val(),
-                status:status,
-                total_given: $( "#total_given" ).val(),
 
-                change: $( "#change" ).val(),
-                vat: $( "#vat" ).val(),
-                delivery_cost: $( "#delivery_cost" ).val(),
-                customer_id: $( "#customer_id" ).val(),
-                items: _.map( cart, function ( cart ) {
+                items: _.map(cart, function (cart) {
                     return {
-                        product_id: cart.product_id,
-                        size: cart.size,
+                        id: cart.id,
+                        name: cart.name,
                         quantity: cart.quantity,
                         price: cart.price
                     }
-                } )
+                })
+
             };
-            var total_amount = Number( localStorage.getItem( "total_amount" ) );
-            _.map( cart, function ( cart ) {
-                localStorage.setItem( "total_amount", total_amount + ( cart.quantity * cart.price ) );
-            } );
+            form_data.note = $('#order_note').val();
 
-            $( "#completeOrder" ).html( '<i class="fa fa-spinner fa-spin" style="font-size:18px"></i>' );
-            $( "#completeOrder" ).prop( "disabled", true );
 
-            $.ajax( {
+            $("#completeOrder").html('<i class="fa fa-spinner fa-spin" style="font-size:18px"></i>');
+            $("#completeOrder").prop("disabled", true);
+
+            $.ajax({
                 type: 'POST',
                 headers: {
-                    'X-CSRF-TOKEN': $( 'meta[name="csrf-token"]' ).attr( 'content' )
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: 'http://pos.templatesvalley.com/sales/complete_sale',
+                url: '{{route('mobile.sale')}}',
                 data: form_data,
-                success: function ( msg ) {
-                    $( "#myModal" ).modal( "hide" );
+                success: function (msg) {
                     cart = [];
-                    $( "#total_given" ).val( "" );
-                    $( "#change" ).val( "" );
-                    $( "#comments" ).val( "" );
-                    $( "#total_amount_model" ).html( "0.00" );
-                    $( "#completeOrder" ).html( 'Checkout' );
-                    $( "#completeOrder" ).prop( "disabled", false );
+                    $("#order_note").val("");
 
-                    $("#full_name").val("");
-                    $("#address_c").val("");
-                    $("#neighborhood").val("");
-                    $("#comments_c").val("");
-                    $("#id").val("");
+                    $("#completeOrder").html('Siparişleri Onayla');
+                    $("#completeOrder").prop("disabled", false);
 
-                    var form_dataa = {
-                        id:$("#holdOrderID").val()
-                    }
 
-                    $("#holdOrderID").val("");
-                    $.ajax( {
-                        type: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $( 'meta[name="csrf-token"]' ).attr( 'content' )
-                        },
-                        url: 'http://pos.templatesvalley.com/sale/hold_order_remove',
-                        data: form_dataa,
-                        success: function ( msg ) {
 
-                        }
-                    });
-
-                    swal( {
-                        title: 'Order Completed',
+                    swal({
+                        title: 'Siparişiniz Alındı',
                         type: 'success',
                         text: ''
-                    } ).then( function () {
+                    }).then(function () {
 
-                        window.open( msg, "_blank" );
+
 
                         // if ( Number( localStorage.getItem( "total_amount" ) ) >= 500 ) {
 
@@ -234,16 +191,12 @@
                         // localStorage.setItem( "total_amount", 0 );
 
                         // }
-                    } )
-                    $( "#p_subtotal" ).html( "0.00" );
+                    })
 
-                    $( "#p_hst" ).html( "0.00" );
-
-                    $( "#p_discount" ).html( "0.00" );
                     show_cart();
                 }
-            } );
-        } );
+            });
+        });
 
     </script>
 @stop
@@ -358,7 +311,13 @@
                                 </table>
 
                             </div>
-                            <h4 class="TotalAmount font-weight-bold text-right text-bold">₺ 0  </h4>
+                            <h4 class="TotalAmount font-weight-bold text-right text-bold">₺ 0 </h4>
+                        </div>
+                        <hr>
+
+                        <div class="col-md-7">
+                            <textarea id="order_note" rows="3" cols="3" class="form-control" placeholder="Sipariş Notu"
+                                      style="margin: 0px 166.828px 0px 0px; height: 85px;"></textarea>
                         </div>
 
 
@@ -415,7 +374,6 @@
             </div>
             <!--Modal: Name-->
         @endforeach
-
 
 
     </div>
