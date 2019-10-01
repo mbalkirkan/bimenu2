@@ -24,16 +24,6 @@ class OrderController extends Controller
         $order = Order::where('customer_id', '=', $request->session()->get('user.id'))->where('status', 0)->first();
         if($order)
         {
-
-//$col= json($order->items_id);
-//            foreach ($col as $item) {
-//               return $item;
-//            }
-
-
-
-
-
             $arr_all=array();
             foreach (json_decode($order->items_id) as $key=> $item) {
                 $arr_all[$key]=$item;
